@@ -27,12 +27,13 @@ const REGISTER_EMAIL = "info@buildinclt.com";
   const target = new Date(clock.dataset.deadline);
   if (Number.isNaN(target.getTime())) return; // leaves the written date in place
 
-  const units = [
-    { key: "days", label: "Days" },
-    { key: "hours", label: "Hours" },
-    { key: "minutes", label: "Minutes" },
-    { key: "seconds", label: "Seconds" },
-  ];
+  // Подписи берутся из разметки: у страницы свой язык, а у скрипта его быть
+  // не должно — иначе перевод сайта требует правки кода.
+  const written = (clock.dataset.labels || "Days,Hours,Minutes,Seconds").split(",");
+  const units = ["days", "hours", "minutes", "seconds"].map((key, i) => ({
+    key,
+    label: (written[i] || "").trim(),
+  }));
 
   // Built once; only the digits are touched afterwards. Rebuilding four
   // elements every second is how a countdown ends up flickering.

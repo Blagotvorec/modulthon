@@ -84,10 +84,15 @@ server {
 
     # Главная — это витрина обратного отсчёта, и она обязана быть свежей:
     # закэшированная копия покажет вчерашнее число дней и будет врать.
-    location ~ ^/(index|register)\.html$ {
+    # Правило по расширению, а не по списку имён: со списком английские
+    # страницы под /en/ молча выпадали бы из него.
+    location ~* \.html$ {
         add_header Cache-Control "no-cache";
     }
     location = / {
+        add_header Cache-Control "no-cache";
+    }
+    location = /en/ {
         add_header Cache-Control "no-cache";
     }
 
@@ -126,9 +131,10 @@ sudo certbot --nginx -d nusathon.com -d www.nusathon.com -d modulthon.com -d www
 
 ## Шаг 5. Проверить
 
-1. `https://modulthon.com` — чёрная страница с отсчётом, **без прокрутки**.
-2. `https://modulthon.com/register.html` — форма.
-3. `https://nusathon.com` — портал на месте: чёрный, по-русски.
+1. `https://modulthon.com` — чёрная страница с отсчётом по-русски, **без прокрутки**.
+2. `https://modulthon.com/en/` — она же по-английски.
+3. `https://modulthon.com/register.html` и `/en/register.html` — форма.
+4. `https://nusathon.com` — портал на месте: чёрный, по-русски.
 4. `https://nusathon.com/en/` — английская версия, тоже чёрная.
 5. `https://buildinclt.com` — основной сайт не задет.
 

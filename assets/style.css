@@ -127,6 +127,18 @@ button { font: inherit; color: inherit; }
 .by:hover { color: var(--tan); }
 .by b { font-weight: 400; color: var(--muted); }
 
+.head__right { display: inline-flex; align-items: center; gap: clamp(10px, 1.6vw, 26px); }
+.langs {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font-family: var(--mono);
+  font-size: clamp(8.5px, 0.7vw, 10px);
+  letter-spacing: 0.16em;
+  color: var(--muted-2);
+}
+.langs a { text-decoration: none; transition: color 0.35s var(--ease); }
+.langs a:hover { color: var(--bone); }
+.langs a[aria-current] { color: var(--bone); }
+
 /* ── the button, of which there is one ──────────────────────────────────── */
 
 .btn {
