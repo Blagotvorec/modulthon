@@ -8,7 +8,7 @@ DNS уже настроен: `modulthon.com` и `www.modulthon.com` смотря
 теперь у него собственный сайт.
 
 ```
-nusathon.com   ──▶ /home/inclt/inclt-webapp/nusathon/
+nusathon.com   ──▶ /home/inclt/nusathon/
 modulthon.com  ──▶ /home/inclt/modulthon/      ← было 301
 ```
 
@@ -45,7 +45,7 @@ server {
     listen 80;
     server_name nusathon.com www.nusathon.com;
 
-    root /home/inclt/inclt-webapp/nusathon;
+    root /home/inclt/nusathon;
     index index.html;
 
     location /assets/ {
