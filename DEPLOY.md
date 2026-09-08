@@ -30,6 +30,11 @@ ls /home/inclt/inclt-webapp/modulthon
 
 ## Шаг 2. Переписать конфиг nusathon без редиректа
 
+> Шаги 2, 3 и 4 делаются подряд, без перерыва. Между ними у обоих
+> доменов нет блока на 443: HTTPS отвечает дефолтный сервер с
+> сертификатом `clt.dariapimenova.com`, и браузер показывает
+> предупреждение. Шаг 4 это чинит.
+
 Certbot дописал в этот файл блоки для 443 — их не надо править руками,
 проще положить файл заново в исходном виде и в шаге 4 дать certbot'у
 проставить TLS повторно.
@@ -48,7 +53,7 @@ server {
         add_header Cache-Control "public, must-revalidate";
     }
 
-    location ~ ^/(index|apply)\.html$ {
+    location ~* \.html$ {
         add_header Cache-Control "no-cache";
     }
 
@@ -123,8 +128,9 @@ sudo certbot --nginx -d nusathon.com -d www.nusathon.com -d modulthon.com -d www
 
 1. `https://modulthon.com` — чёрная страница с отсчётом, **без прокрутки**.
 2. `https://modulthon.com/register.html` — форма.
-3. `https://nusathon.com` — платформа на месте, костяная.
-4. `https://buildinclt.com` — основной сайт не задет.
+3. `https://nusathon.com` — портал на месте: чёрный, по-русски.
+4. `https://nusathon.com/en/` — английская версия, тоже чёрная.
+5. `https://buildinclt.com` — основной сайт не задет.
 
 ---
 
