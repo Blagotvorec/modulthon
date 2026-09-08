@@ -9,7 +9,7 @@ DNS уже настроен: `modulthon.com` и `www.modulthon.com` смотря
 
 ```
 nusathon.com   ──▶ /home/inclt/inclt-webapp/nusathon/
-modulthon.com  ──▶ /home/inclt/inclt-webapp/modulthon/      ← было 301
+modulthon.com  ──▶ /home/inclt/modulthon/      ← было 301
 ```
 
 Все команды — на сервере под root (`sudo -i` сразу после подключения).
@@ -19,11 +19,11 @@ modulthon.com  ──▶ /home/inclt/inclt-webapp/modulthon/      ← было 3
 ## Шаг 1. Забрать код
 
 ```bash
-sudo -iu inclt git -C /home/inclt/inclt-webapp pull
+sudo -iu inclt git -C /home/inclt/modulthon pull
 ```
 
 ```bash
-ls /home/inclt/inclt-webapp/modulthon
+ls /home/inclt/modulthon
 ```
 
 ---
@@ -74,7 +74,7 @@ server {
     listen 80;
     server_name modulthon.com www.modulthon.com;
 
-    root /home/inclt/inclt-webapp/modulthon;
+    root /home/inclt/modulthon;
     index index.html;
 
     location /assets/ {
@@ -143,7 +143,7 @@ sudo certbot --nginx -d nusathon.com -d www.nusathon.com -d modulthon.com -d www
 ## Обновление
 
 ```bash
-sudo -iu inclt git -C /home/inclt/inclt-webapp pull
+sudo -iu inclt git -C /home/inclt/modulthon pull
 ```
 
 Сборки нет, nginx перезапускать не нужно.
