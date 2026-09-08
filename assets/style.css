@@ -1,0 +1,399 @@
+/* =============================================================================
+   MODULTHON — stage 01, by INCLT.
+
+   The countdown page is one screen and never scrolls: header, a body split
+   between the clock and the field of tags, and a footer line. That constraint
+   drives every size below — type scales against the viewport's HEIGHT as much
+   as its width, because on a page that may not overflow, a short window is the
+   dangerous one, not a narrow one.
+
+   Registration is the exception: seven questions cannot honestly be squeezed
+   into a screen, so that page scrolls like any other.
+
+   The tan is INCLT's, so the chain stays visible even here.
+   ========================================================================== */
+
+:root {
+  --void:   #000000;
+  --bone:   #f2efe9;
+  --tan:    #c69a65;
+  --tan-dk: #8e6a42;
+
+  --muted:   rgba(242, 239, 233, 0.52);
+  --muted-2: rgba(242, 239, 233, 0.3);
+  --line:    rgba(242, 239, 233, 0.14);
+  --line-2:  rgba(242, 239, 233, 0.07);
+
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --sans: "Inter Tight", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  --gut: clamp(18px, 4vw, 72px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--bone);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* One screen, three rows, no scrollbar. svh rather than vh so the mobile
+   browser's collapsing toolbar cannot push the footer out of sight. */
+body.screen {
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+/* A single warm source, low and off-centre, so the black has depth instead of
+   being flat ink. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(58vw 46vh at 74% 6%, rgba(198, 154, 101, 0.14), transparent 62%),
+    radial-gradient(48vw 44vh at 10% 96%, rgba(198, 154, 101, 0.06), transparent 60%);
+}
+
+/* Film grain. Keeps large flat blacks from banding on cheap panels. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+main, header, footer { position: relative; z-index: 1; min-height: 0; }
+
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--tan); color: var(--void); }
+:focus-visible { outline: 1px solid var(--tan); outline-offset: 4px; }
+
+.wrap { padding-inline: var(--gut); }
+.limit { max-width: 1500px; margin-inline: auto; width: 100%; }
+
+.mono, .eyebrow, .btn, .tag, .foot, .clock__unit small {
+  font-family: var(--mono);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.eyebrow { font-size: clamp(9px, 0.72vw, 10.5px); color: var(--muted-2); display: block; }
+
+/* ── header ─────────────────────────────────────────────────────────────── */
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: clamp(14px, 2.4vh, 26px);
+}
+.mark {
+  font-family: var(--mono);
+  font-size: clamp(10px, 0.85vw, 12px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+}
+.by {
+  font-family: var(--mono);
+  font-size: clamp(8.5px, 0.7vw, 10px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  text-decoration: none;
+  transition: color 0.4s var(--ease);
+}
+.by:hover { color: var(--tan); }
+.by b { font-weight: 400; color: var(--muted); }
+
+/* ── the button, of which there is one ──────────────────────────────────── */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85em;
+  padding: 1.05em 2em;
+  font-size: clamp(10px, 0.8vw, 11px);
+  border: 1px solid var(--bone);
+  border-radius: 999px;
+  background: var(--bone);
+  color: var(--void);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.5s var(--ease), background 0.5s var(--ease),
+              color 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+.btn:hover { transform: translateY(-2px); background: var(--tan); border-color: var(--tan); }
+.btn__dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+.btn--quiet { background: none; color: var(--bone); border-color: var(--line); }
+.btn--quiet:hover { background: none; color: var(--tan); border-color: var(--tan); }
+
+/* ── the one screen ─────────────────────────────────────────────────────── */
+
+.one {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  gap: clamp(20px, 3.4vw, 64px);
+  align-items: center;
+  min-height: 0;
+  padding-block: clamp(8px, 1.6vh, 24px);
+}
+
+.lead {
+  display: grid;
+  gap: clamp(10px, 1.9vh, 24px);
+  align-content: center;
+  min-height: 0;
+}
+
+.lead__title {
+  margin: 0;
+  font-weight: 200;
+  /* min() against both axes: a wide-but-short window is the case that breaks
+     a one-screen page, and vw alone cannot see it. */
+  font-size: clamp(30px, min(8.4vw, 12.4vh), 132px);
+  line-height: 0.86;
+  letter-spacing: -0.05em;
+}
+.lead__title em { font-style: normal; color: var(--tan); }
+
+.lead__line {
+  margin: 0;
+  max-width: 38ch;
+  font-size: clamp(13px, min(1.25vw, 2vh), 19px);
+  line-height: 1.42;
+  color: var(--muted);
+}
+.lead__line b { font-weight: 400; color: var(--bone); }
+
+.lead__act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+.lead__act .note {
+  margin: 0;
+  font-size: clamp(10px, 0.85vw, 12.5px);
+  color: var(--muted-2);
+  max-width: 28ch;
+}
+
+/* ── the clock ──────────────────────────────────────────────────────────── */
+
+.clock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: clamp(12px, 2.4vw, 48px);
+}
+.clock__unit { display: grid; gap: 4px; }
+.clock__unit b {
+  font-weight: 200;
+  font-size: clamp(30px, min(6.6vw, 10vh), 104px);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+  /* Tabular figures, or the whole row twitches once a second. */
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+.clock__unit small { font-size: clamp(8px, 0.66vw, 9.5px); color: var(--muted-2); }
+.clock__sep {
+  font-weight: 200;
+  font-size: clamp(18px, min(4vw, 6vh), 66px);
+  line-height: 1;
+  color: var(--tan-dk);
+  align-self: start;
+}
+@media (max-width: 620px) { .clock__sep { display: none; } }
+
+/* Before the script runs there is a date in the markup, not an empty row. */
+.clock__fallback { font-size: clamp(16px, 2.6vw, 30px); font-weight: 200; letter-spacing: -0.02em; }
+
+.clock--done b { color: var(--tan); }
+
+/* ── the tags ───────────────────────────────────────────────────────────── */
+
+.field {
+  display: grid;
+  gap: clamp(10px, 1.8vh, 22px);
+  align-content: center;
+  min-height: 0;
+}
+
+/* Not a word-cloud generator — a hand-set field. Weight and opacity carry the
+   hierarchy, so it reads as a list of possibilities rather than decoration. */
+.cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: clamp(6px, 1vh, 14px) clamp(10px, 1.4vw, 26px);
+}
+.tag {
+  font-size: clamp(9px, 0.72vw, 10.5px);
+  color: var(--muted-2);
+  white-space: nowrap;
+  transition: color 0.45s var(--ease);
+}
+.tag:hover { color: var(--bone); }
+/* Three tiers. The typologies shout, the craft words speak, the constraints
+   whisper — roughly the order a participant meets them in. */
+.tag--lg {
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: clamp(19px, min(2.9vw, 4.3vh), 46px);
+  letter-spacing: -0.035em;
+  text-transform: none;
+  color: var(--bone);
+}
+.tag--md {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(13px, min(1.6vw, 2.4vh), 25px);
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--muted);
+}
+.tag--lg:hover { color: var(--tan); }
+.tag--md:hover { color: var(--bone); }
+
+/* Below this the two columns stack, and the quietest tier is the first thing
+   to go — a screen that fits is worth more than the last eight words. */
+@media (max-width: 900px) {
+  .one { grid-template-columns: minmax(0, 1fr); align-content: center; gap: clamp(16px, 2.6vh, 30px); }
+  .tag:not(.tag--lg):not(.tag--md) { display: none; }
+}
+@media (max-width: 900px) and (max-height: 720px) {
+  .tag--md { display: none; }
+  .lead__line { display: none; }
+}
+
+/* ── footer ─────────────────────────────────────────────────────────────── */
+
+.foot {
+  display: flex; flex-wrap: wrap; gap: 8px 32px;
+  align-items: center; justify-content: space-between;
+  padding-block: clamp(12px, 2vh, 24px);
+  border-top: 1px solid var(--line-2);
+  font-size: clamp(8.5px, 0.7vw, 10px);
+  color: var(--muted-2);
+}
+.foot a { text-decoration: none; transition: color 0.35s var(--ease); }
+.foot a:hover { color: var(--bone); }
+.foot nav { display: flex; flex-wrap: wrap; gap: 18px; }
+.foot .hint { color: var(--muted); }
+.foot .hint b { font-weight: 400; color: var(--tan); }
+
+/* ── registration — the page that is allowed to scroll ──────────────────── */
+
+.reg {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(36px, 6vw, 100px);
+  padding-block: clamp(30px, 5vh, 70px) clamp(56px, 9vh, 120px);
+}
+@media (max-width: 900px) { .reg { grid-template-columns: minmax(0, 1fr); } }
+
+.brief { position: sticky; top: 36px; align-self: start; display: grid; gap: 20px; }
+@media (max-width: 900px) { .brief { position: static; } }
+.brief h1 {
+  margin: 0;
+  font-weight: 200;
+  font-size: clamp(32px, 4.6vw, 64px);
+  line-height: 0.96;
+  letter-spacing: -0.042em;
+}
+.brief h1 em { font-style: normal; color: var(--tan); }
+.brief p { margin: 0; color: var(--muted); max-width: 38ch; }
+.brief dl { margin: 0; display: grid; gap: 1px; background: var(--line-2); border-block: 1px solid var(--line-2); }
+.brief dl > div { background: var(--void); padding: 13px 0; display: grid; grid-template-columns: 7rem 1fr; gap: 14px; }
+.brief dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--muted-2); padding-top: 0.3em; }
+.brief dd { margin: 0; font-size: 0.97em; }
+
+.form { display: grid; gap: clamp(26px, 3.2vw, 40px); }
+.q { display: grid; gap: 13px; }
+.q__ask { margin: 0; font-weight: 300; font-size: clamp(17px, 1.6vw, 24px);
+          letter-spacing: -0.018em; line-height: 1.25; }
+.q__ask span { color: var(--tan); font-family: var(--mono); font-size: 10px;
+               letter-spacing: 0.16em; vertical-align: 0.55em; margin-right: 0.9em; }
+.q__why { margin: -5px 0 0; font-size: 0.86em; color: var(--muted-2); max-width: 52ch; }
+
+.q input, .q textarea {
+  width: 100%;
+  padding: 0.65em 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  border-radius: 0;
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 300;
+  color: var(--bone);
+  transition: border-color 0.4s var(--ease);
+}
+.q textarea { resize: vertical; min-height: 5em; line-height: 1.5; }
+.q input:focus, .q textarea:focus { outline: none; border-bottom-color: var(--tan); }
+.q input::placeholder, .q textarea::placeholder { color: var(--muted-2); }
+
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.4vw, 32px); }
+@media (max-width: 620px) { .pair { grid-template-columns: 1fr; } }
+
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { position: relative; display: inline-block; }
+.opt input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; pointer-events: none; }
+.opt span {
+  display: inline-block;
+  padding: 0.6em 1.05em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: border-color 0.35s var(--ease), color 0.35s var(--ease), background 0.35s var(--ease);
+}
+.opt:hover span { border-color: var(--muted-2); color: var(--bone); }
+.opt input:checked + span { background: var(--bone); border-color: var(--bone); color: var(--void); }
+.opt input:focus-visible + span { outline: 1px solid var(--tan); outline-offset: 3px; }
+
+.form__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 18px;
+              padding-top: 14px; border-top: 1px solid var(--line-2); }
+.form__note { margin: 0; font-size: 0.85em; color: var(--muted-2); max-width: 38ch; }
+.form__status { margin: 0; min-height: 1.4em; font-size: 0.9em; color: var(--tan); }
+.form__status[data-error] { color: #d4795e; }
+.btn[disabled] { opacity: 0.4; pointer-events: none; }
+
+.done { display: grid; gap: 20px; justify-items: start; padding-top: clamp(16px, 4vw, 34px); }
+.done h2 { margin: 0; font-weight: 200; font-size: clamp(26px, 3.6vw, 46px);
+           letter-spacing: -0.035em; line-height: 1.02; }
+.done p { margin: 0; color: var(--muted); max-width: 44ch; }
+.done a.inline { color: var(--tan); text-decoration: none; border-bottom: 1px solid var(--tan-dk); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
