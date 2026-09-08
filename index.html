@@ -20,7 +20,10 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@graph": [
+  {
   "@type": "Event",
+  "@id": "https://modulthon.com/#event",
   "name": "Modulthon — Stage 01",
   "description": "Forty-eight hours designing modular buildings in cross-laminated timber.",
   "startDate": "2026-10-08T09:00:00+08:00",
@@ -31,6 +34,20 @@
                 "address": { "@type": "PostalAddress", "addressCountry": "ID" } },
   "organizer": { "@type": "Organization", "name": "INCLT", "url": "https://buildinclt.com" },
   "url": "https://modulthon.com/"
+  },
+  {
+  "@type": "Organization",
+  "@id": "https://modulthon.com/#organization",
+  "name": "MODULTHON",
+  "url": "https://modulthon.com/",
+  "parentOrganization": {
+    "@type": "Organization",
+    "@id": "https://buildinclt.com/#organization",
+    "name": "INCLT",
+    "url": "https://buildinclt.com/"
+  }
+  }
+  ]
 }
 </script>
 </head>
@@ -97,6 +114,7 @@
   <span class="hint">Stage <b>01</b> of a series — the module. Others follow.</span>
   <nav>
     <a href="./register.html">Register</a>
+    <a href="https://nusathon.com" rel="noopener">nusathon.com</a>
     <a href="https://buildinclt.com" rel="noopener">buildinclt.com</a>
     <a href="mailto:info@buildinclt.com">info@buildinclt.com</a>
   </nav>
