@@ -156,6 +156,7 @@ const REGISTER_EMAIL = "info@buildinclt.com";
 
       form.hidden = true;
       done.hidden = false;
+      openJoin();
       done.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch {
       submit.disabled = false;
@@ -163,3 +164,21 @@ const REGISTER_EMAIL = "info@buildinclt.com";
     }
   });
 })();
+
+/* ── окно «вступите в канал» ────────────────────────────────────────────── */
+
+/* Показывается один раз, сразу после успешной отправки. Канал — единственное
+   место, где участник потом узнает бриф и результат, поэтому предложение
+   стоит там, где интерес максимален, а не строчкой в письме, которого он
+   может и не открыть. */
+function openJoin() {
+  const box = document.getElementById("join");
+  if (!box) return;
+  // showModal даёт ловушку фокуса, Esc и подложку; show() — ничего из этого.
+  if (typeof box.showModal === "function" && !box.open) box.showModal();
+  else box.setAttribute("open", "");            // на случай старого браузера
+}
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-open-join]")) openJoin();
+});

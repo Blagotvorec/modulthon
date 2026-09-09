@@ -179,10 +179,39 @@
         <a class="inline" href="mailto:info@buildinclt.com">info@buildinclt.com</a>.
       </p>
       <a class="btn btn--quiet" href="./">Назад</a>
-    </div>
+          <p class="done__acts">
+        <button class="btn" type="button" data-open-join>Канал участников <span class="btn__arrow" aria-hidden="true">→</span></button>
+      </p>
+</div>
   </div>
 
 </main>
+
+  <!-- Показывается сразу после отправки. Момент выбран не случайно: интерес
+       у человека максимален именно здесь, а канал — единственное место, где
+       он потом узнает бриф, расписание и имя победителя. -->
+  <dialog class="join" id="join">
+    <div class="join__body">
+      <span class="eyebrow">Заявка принята</span>
+      <h2 class="join__title">Теперь — в канал <em>участников</em>.</h2>
+      <p class="join__text">
+        Весь Modulthon идёт там и только там: брифы, расписание, ответы на вопросы
+        и объявление победителей. Кто не в канале — узнаёт последним.
+      </p>
+
+      <a class="btn join__cta" href="https://t.me/+xoD5pkJ8YSVlMmNi" target="_blank" rel="noopener">
+        Вступить в Telegram <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <p class="join__alt">
+        Нет Telegram? Есть <a href="https://chat.whatsapp.com/Cfi0zI77T502tge9FHA7OF?mode=gi_t" target="_blank" rel="noopener">группа в WhatsApp</a> —
+        но основное происходит в Telegram, и его лучше поставить.
+      </p>
+
+      <form method="dialog"><button class="btn btn--quiet join__later" value="close">Позже</button></form>
+    </div>
+  </dialog>
+
 
 <footer class="foot wrap limit">
   <span>MODULTHON — ЭТАП 01 — ОНЛАЙН</span>
