@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MODULTHON — 48 часов проектирования модульных зданий на Бали, бесплатно</title>
-<meta name="description" content="Этап 01. Сорок восемь часов проектирования модульных зданий из CLT-панелей — баня, спа, галерея, лаборатория, спортзал. Участие бесплатное. Проводит INCLT на Бали.">
+<title>MODULTHON — 48 часов онлайн: проектируем модульные здания из CLT, бесплатно</title>
+<meta name="description" content="Этап 01, онлайн. Сорок восемь часов проектирования модульных зданий из CLT-панелей — баня, спа, галерея, лаборатория, спортзал. Участие бесплатное, нужен только свой компьютер. Один проект INCLT строит за свой счёт, а его автор становится партнёром.">
 <link rel="canonical" href="https://modulthon.com/">
 <link rel="alternate" hreflang="ru" href="https://modulthon.com/">
 <link rel="alternate" hreflang="en" href="https://modulthon.com/en/">
@@ -12,8 +12,8 @@
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="MODULTHON — 48 часов проектирования модульных зданий на Бали, бесплатно">
-<meta property="og:description" content="Этап 01. Один модуль, сорок восемь часов и то здание, которое вы решите в него поместить. Бесплатно.">
+<meta property="og:title" content="MODULTHON — 48 часов онлайн, бесплатно">
+<meta property="og:description" content="Один модуль, 48 часов и то здание, которое вы решите в него поместить. Лучший проект мы построим — материалы, команда и площадка наши.">
 <meta property="og:url" content="https://modulthon.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Crect x='7' y='7' width='18' height='18' fill='none' stroke='%23c69a65' stroke-width='2'/%3E%3Cpath d='M16 7v18M7 16h18' stroke='%23c69a65' stroke-width='2'/%3E%3C/svg%3E">
@@ -29,11 +29,11 @@
   "@type": "Event",
   "@id": "https://modulthon.com/#event",
   "name": "Modulthon — Stage 01",
-  "description": "Forty-eight hours designing modular buildings in cross-laminated timber. Free to enter.",
+  "description": "Forty-eight hours online, designing modular buildings in cross-laminated timber. Free to enter. One project is built at INCLT's expense and its author becomes a partner.",
   "inLanguage": ["ru", "en"],
   "startDate": "2026-10-08T09:00:00+08:00",
   "endDate": "2026-10-10T09:00:00+08:00",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
   "isAccessibleForFree": true,
   "offers": {
@@ -43,8 +43,10 @@
     "availability": "https://schema.org/InStock",
     "url": "https://modulthon.com/register.html"
   },
-  "location": { "@type": "Place", "name": "Bali, Indonesia",
-                "address": { "@type": "PostalAddress", "addressCountry": "ID" } },
+  "location": {
+    "@type": "VirtualLocation",
+    "url": "https://modulthon.com/"
+  },
   "organizer": { "@type": "Organization", "name": "INCLT", "url": "https://buildinclt.com" },
   "url": "https://modulthon.com/"
   },
@@ -77,7 +79,7 @@
 <main class="one wrap limit">
 
   <section class="lead">
-    <span class="eyebrow">Этап 01 — первый в серии</span>
+    <span class="eyebrow">Этап 01 — первый в серии — онлайн</span>
     <h1 class="lead__title">MODUL<em>THON</em></h1>
 
     <!-- Единственное значение, которое правят, чтобы сдвинуть событие. Меняя
@@ -87,40 +89,107 @@
     </div>
 
     <p class="lead__line">
-      <b>48 часов</b> проектирования модульных зданий из CLT-панелей.
-      Один модуль — и то, что вы решите в него поместить.
+      <b>48 часов онлайн</b> — проектируем модульные здания из CLT-панелей.
+      Один модуль и то, что вы решите в него поместить. Из дома, на своём
+      компьютере, откуда угодно.
     </p>
 
     <div class="lead__act">
       <a class="btn" href="./register.html"><span class="btn__dot"></span>Зарегистрироваться</a>
-      <p class="note">Участие бесплатное. Мест столько, сколько помещается в мастерскую, — отбора жюри нет.</p>
+      <p class="note">Бесплатно. Ничего не нужно собирать руками — только проектировать.</p>
     </div>
+
+    <p class="prize">
+      <b>Один проект мы построим за свой счёт</b> — материалы, команда
+      и площадка наши. Готовый объект уходит автору в портфолио, а сам он
+      становится партнёром INCLT: заказывает у нас свои проекты на CLT
+      и продаёт их.
+    </p>
   </section>
 
   <section class="field">
-    <span class="eyebrow">Модуль задан — здание нет</span>
-    <div class="cloud">
+    <!-- Слова и ярусы живут здесь: их читает поисковик и видит посетитель
+         без JS. cloud.js забирает их отсюда, прячет список и строит из тех
+         же слов сферу. Центр и размер — в data-атрибутах ниже. -->
+    <div class="cloud" id="cloud" data-cx="0.20" data-cy="-0.01" data-scale="0.94"
+         data-label-hint="перетащите центр — двигать облако · колесо — размер"
+         data-label-reset="облако возвращено на место"
+         data-label-handle="Переместить облако. Колесо — размер, двойной клик — сбросить">
+      <span class="tag tag--lg">Йога-студия</span>
+      <span class="tag tag--md">Монтаж</span>
+      <span class="tag">Прототип</span>
+      <span class="tag tag--lg">Гостевой дом</span>
       <span class="tag tag--lg">Баня</span>
-      <span class="tag">48 часов</span>
-      <span class="tag tag--lg">Спа</span>
-      <span class="tag tag--md">Префабрикация</span>
-      <span class="tag tag--lg">Спортзал</span>
-      <span class="tag">Бесплатно</span>
-      <span class="tag tag--lg">Галерея</span>
-      <span class="tag tag--md">CLT-панели</span>
-      <span class="tag tag--lg">Лаборатория</span>
+      <span class="tag tag--lg">Бар</span>
+      <span class="tag tag--md">Инсоляция</span>
+      <span class="tag tag--md">Пролёт</span>
+      <span class="tag tag--md">Шаг модуля</span>
+      <span class="tag">Партнёрство</span>
+      <span class="tag tag--lg">Хаммам</span>
+      <span class="tag tag--lg">Ко-ливинг</span>
+      <span class="tag tag--lg">Коворкинг</span>
       <span class="tag">Один модуль</span>
-      <span class="tag tag--lg">Парикмахерская</span>
-      <span class="tag tag--md">Плоская упаковка</span>
-      <span class="tag tag--lg">Клиника</span>
       <span class="tag">Влажность</span>
+      <span class="tag">Портфолио</span>
+      <span class="tag tag--lg">Парикмахерская</span>
+      <span class="tag tag--md">Тепловой контур</span>
+      <span class="tag tag--lg">Клиника</span>
+      <span class="tag tag--md">Сборка за день</span>
       <span class="tag tag--lg">Павильон</span>
-      <span class="tag tag--md">Тропическая детализация</span>
-      <span class="tag tag--lg">Кафе</span>
-      <span class="tag">Путь нагрузки</span>
+      <span class="tag tag--md">Крепёж</span>
+      <span class="tag">Муссон</span>
+      <span class="tag tag--md">Кровля</span>
+      <span class="tag tag--lg">Музей</span>
+      <span class="tag">Ветровая нагрузка</span>
+      <span class="tag">Контейнер</span>
+      <span class="tag tag--lg">Лаборатория</span>
+      <span class="tag tag--lg">Студия звука</span>
+      <span class="tag tag--md">Префабрикация</span>
+      <span class="tag tag--md">Узлы</span>
+      <span class="tag tag--lg">Галерея</span>
+      <span class="tag">Соль в воздухе</span>
+      <span class="tag tag--lg">Сауна</span>
       <span class="tag tag--lg">Мастерская</span>
+      <span class="tag">Серия</span>
+      <span class="tag tag--md">Стыки</span>
+      <span class="tag">Бесплатно</span>
+      <span class="tag">Онлайн</span>
+      <span class="tag tag--md">Огнестойкость</span>
+      <span class="tag tag--md">CLT-панели</span>
+      <span class="tag">Бали</span>
+      <span class="tag tag--lg">Кафе</span>
+      <span class="tag tag--lg">Спортивный комплекс</span>
+      <span class="tag tag--lg">Пекарня</span>
+      <span class="tag tag--lg">Ресепшн</span>
+      <span class="tag">Спецификация</span>
+      <span class="tag tag--lg">Теплица</span>
+      <span class="tag tag--md">Повторяемость</span>
+      <span class="tag">Путь нагрузки</span>
+      <span class="tag tag--lg">Офис</span>
+      <span class="tag tag--md">Сваи</span>
+      <span class="tag tag--lg">Часовня</span>
+      <span class="tag tag--md">Плоская упаковка</span>
+      <span class="tag">Сейсмика</span>
+      <span class="tag tag--lg">Магазин</span>
+      <span class="tag tag--md">Гидроизоляция</span>
       <span class="tag">Построено, а не отрисовано</span>
+      <span class="tag tag--md">Транспортный габарит</span>
+      <span class="tag tag--md">Вентфасад</span>
+      <span class="tag">48 часов</span>
+      <span class="tag">Чертёж</span>
+      <span class="tag tag--lg">Барбершоп</span>
+      <span class="tag">Смета</span>
+      <span class="tag">Допуск</span>
+      <span class="tag tag--md">Тропическая детализация</span>
+      <span class="tag tag--lg">Спортзал</span>
+      <span class="tag tag--lg">Спа</span>
+      <span class="tag">UTC+8</span>
+      <span class="tag">Термиты</span>
+      <span class="tag tag--lg">Библиотека</span>
+      <span class="tag tag--md">Акустика</span>
+      <span class="tag">Логистика</span>
     </div>
+
   </section>
 
 </main>
@@ -136,5 +205,6 @@
 </footer>
 
 <script src="./assets/app.js" defer></script>
+<script src="./assets/cloud.js" defer></script>
 </body>
 </html>

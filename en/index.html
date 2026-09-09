@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MODULTHON — 48 free hours designing modular buildings, in Bali</title>
-<meta name="description" content="Stage 01. Forty-eight hours designing modular buildings in cross-laminated timber — a sauna, a spa, a gallery, a laboratory. Free to enter. Held in Bali by INCLT.">
+<title>MODULTHON — 48 free hours online, designing modular buildings in CLT</title>
+<meta name="description" content="Stage 01, online. Forty-eight hours designing modular buildings in cross-laminated timber — a sauna, a spa, a gallery, a laboratory. Free, and all you need is your own computer. One project gets built at INCLT's expense, and its author becomes a partner.">
 <link rel="canonical" href="https://modulthon.com/en/">
 <link rel="alternate" hreflang="ru" href="https://modulthon.com/">
 <link rel="alternate" hreflang="en" href="https://modulthon.com/en/">
@@ -12,8 +12,8 @@
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="MODULTHON — 48 free hours designing modular buildings, in Bali">
-<meta property="og:description" content="Stage 01. One module, forty-eight hours, and whatever building you decide to put inside it. Free.">
+<meta property="og:title" content="MODULTHON — 48 free hours online">
+<meta property="og:description" content="One module, 48 hours, and whatever building you decide to put inside it. The best project gets built — materials, crew and space on us.">
 <meta property="og:url" content="https://modulthon.com/en/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Crect x='7' y='7' width='18' height='18' fill='none' stroke='%23c69a65' stroke-width='2'/%3E%3Cpath d='M16 7v18M7 16h18' stroke='%23c69a65' stroke-width='2'/%3E%3C/svg%3E">
@@ -29,10 +29,11 @@
   "@type": "Event",
   "@id": "https://modulthon.com/#event",
   "name": "Modulthon — Stage 01",
-  "description": "Forty-eight hours designing modular buildings in cross-laminated timber.",
+  "description": "Forty-eight hours online, designing modular buildings in cross-laminated timber. Free to enter. One project is built at INCLT's expense and its author becomes a partner.",
+  "inLanguage": ["ru", "en"],
   "startDate": "2026-10-08T09:00:00+08:00",
   "endDate": "2026-10-10T09:00:00+08:00",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
   "isAccessibleForFree": true,
   "offers": {
@@ -42,8 +43,10 @@
     "availability": "https://schema.org/InStock",
     "url": "https://modulthon.com/en/register.html"
   },
-  "location": { "@type": "Place", "name": "Bali, Indonesia",
-                "address": { "@type": "PostalAddress", "addressCountry": "ID" } },
+  "location": {
+    "@type": "VirtualLocation",
+    "url": "https://modulthon.com/"
+  },
   "organizer": { "@type": "Organization", "name": "INCLT", "url": "https://buildinclt.com" },
   "url": "https://modulthon.com/"
   },
@@ -76,7 +79,7 @@
 <main class="one wrap limit">
 
   <section class="lead">
-    <span class="eyebrow">Stage 01 — the first of the series</span>
+    <span class="eyebrow">Stage 01 — the first of the series — online</span>
     <h1 class="lead__title">MODUL<em>THON</em></h1>
 
     <div class="clock" data-deadline="2026-10-08T09:00:00+08:00" data-labels="Days,Hours,Minutes,Seconds">
@@ -84,41 +87,104 @@
     </div>
 
     <p class="lead__line">
-      <b>48 hours</b> designing modular buildings in cross-laminated timber.
-      One module, and whatever you decide to put inside it.
+      <b>48 hours online</b> — designing modular buildings in cross-laminated
+      timber. One module and whatever you put inside it, from home, on your
+      own machine, from anywhere.
     </p>
 
     <div class="lead__act">
       <a class="btn" href="./register.html"><span class="btn__dot"></span>Register</a>
-      <p class="note">Free to enter. Places are limited by the size of the workshop, not by a jury.</p>
+      <p class="note">Free. Nothing to assemble by hand — you design, that is all.</p>
     </div>
+
+    <p class="prize">
+      <b>One project gets built, on us</b> — the materials, the crew and the
+      space are ours. The finished object goes into its author's portfolio,
+      and the author becomes a partner of INCLT: ordering their own
+      CLT projects from us, and selling them.
+    </p>
   </section>
 
   <section class="field">
-    <span class="eyebrow">The module is fixed — the building is not</span>
-    <div class="cloud">
+    <!-- Слова и ярусы живут здесь: их читает поисковик и видит посетитель
+         без JS. cloud.js забирает их отсюда, прячет список и строит из тех
+         же слов сферу. Центр и размер — в data-атрибутах ниже. -->
+    <div class="cloud" id="cloud" data-cx="0.20" data-cy="-0.01" data-scale="0.94">
+      <span class="tag tag--lg">A yoga studio</span>
+      <span class="tag tag--md">Assembly</span>
+      <span class="tag">Prototype</span>
+      <span class="tag tag--lg">A guest house</span>
       <span class="tag tag--lg">A sauna</span>
-      <span class="tag">48 hours</span>
-      <span class="tag tag--lg">A spa</span>
-      <span class="tag tag--md">Prefabrication</span>
-      <span class="tag tag--lg">A gym</span>
-      <span class="tag">Free</span>
-      <span class="tag tag--lg">An art gallery</span>
-      <span class="tag tag--md">Cross-laminated timber</span>
-      <span class="tag tag--lg">A laboratory</span>
+      <span class="tag tag--lg">A bar</span>
+      <span class="tag tag--md">Daylight</span>
+      <span class="tag tag--md">Span</span>
+      <span class="tag tag--md">Module pitch</span>
+      <span class="tag">Partnership</span>
+      <span class="tag tag--lg">A hammam</span>
+      <span class="tag tag--lg">Co-living</span>
+      <span class="tag tag--lg">A co-working</span>
       <span class="tag">One module</span>
-      <span class="tag tag--lg">A salon</span>
-      <span class="tag tag--md">Flat-pack</span>
-      <span class="tag tag--lg">A clinic</span>
       <span class="tag">Humidity</span>
-      <span class="tag tag--lg">A sports hall</span>
-      <span class="tag tag--md">Tropical detailing</span>
+      <span class="tag">Portfolio</span>
+      <span class="tag tag--lg">A salon</span>
+      <span class="tag tag--md">Thermal envelope</span>
+      <span class="tag tag--lg">A clinic</span>
+      <span class="tag tag--md">Raised in a day</span>
       <span class="tag tag--lg">A pavilion</span>
-      <span class="tag">Load path</span>
+      <span class="tag tag--md">Fixings</span>
+      <span class="tag">Monsoon</span>
+      <span class="tag tag--md">Roofing</span>
+      <span class="tag tag--lg">A museum</span>
+      <span class="tag">Wind load</span>
+      <span class="tag">Container</span>
+      <span class="tag tag--lg">A laboratory</span>
+      <span class="tag tag--lg">A sound studio</span>
+      <span class="tag tag--md">Prefabrication</span>
+      <span class="tag tag--md">Joints</span>
+      <span class="tag tag--lg">A gallery</span>
+      <span class="tag">Salt air</span>
+      <span class="tag tag--lg">A banya</span>
+      <span class="tag tag--lg">A workshop</span>
+      <span class="tag">Series</span>
+      <span class="tag tag--md">Seams</span>
+      <span class="tag">Free</span>
+      <span class="tag">Online</span>
+      <span class="tag tag--md">Fire rating</span>
+      <span class="tag tag--md">Cross-laminated timber</span>
+      <span class="tag">Bali</span>
       <span class="tag tag--lg">A café</span>
-      <span class="tag tag--lg">A studio</span>
+      <span class="tag tag--lg">A sports hall</span>
+      <span class="tag tag--lg">A bakery</span>
+      <span class="tag tag--lg">A reception</span>
+      <span class="tag">Schedule</span>
+      <span class="tag tag--lg">A greenhouse</span>
+      <span class="tag tag--md">Repeatability</span>
+      <span class="tag">Load path</span>
+      <span class="tag tag--lg">An office</span>
+      <span class="tag tag--md">Piles</span>
+      <span class="tag tag--lg">A chapel</span>
+      <span class="tag tag--md">Flat-pack</span>
+      <span class="tag">Seismic</span>
+      <span class="tag tag--lg">A shop</span>
+      <span class="tag tag--md">Waterproofing</span>
       <span class="tag">Built, not rendered</span>
+      <span class="tag tag--md">Shipping envelope</span>
+      <span class="tag tag--md">Ventilated façade</span>
+      <span class="tag">48 hours</span>
+      <span class="tag">Drawings</span>
+      <span class="tag tag--lg">A barbershop</span>
+      <span class="tag">Costing</span>
+      <span class="tag">Tolerance</span>
+      <span class="tag tag--md">Tropical detailing</span>
+      <span class="tag tag--lg">A gym</span>
+      <span class="tag tag--lg">A spa</span>
+      <span class="tag">UTC+8</span>
+      <span class="tag">Termites</span>
+      <span class="tag tag--lg">A library</span>
+      <span class="tag tag--md">Acoustics</span>
+      <span class="tag">Logistics</span>
     </div>
+
   </section>
 
 </main>
@@ -134,5 +200,6 @@
 </footer>
 
 <script src="../assets/app.js" defer></script>
+<script src="../assets/cloud.js" defer></script>
 </body>
 </html>

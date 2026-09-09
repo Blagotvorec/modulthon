@@ -11,7 +11,7 @@
  *  client — works the minute the folder is uploaded, with no server at all.
  *  Point it at an endpoint and the same form posts JSON there instead, with
  *  no other change to the page. */
-const REGISTER_ENDPOINT = null;
+const REGISTER_ENDPOINT = "/api/thon";
 
 /** Fallback address, used when REGISTER_ENDPOINT is null. */
 const REGISTER_EMAIL = "info@buildinclt.com";
@@ -108,7 +108,7 @@ const REGISTER_EMAIL = "info@buildinclt.com";
       name: data.get("name")?.trim(),
       email: data.get("email")?.trim(),
       city: data.get("city")?.trim(),
-      telegram: data.get("telegram")?.trim(),
+      contact: data.get("telegram")?.trim(),
       link: data.get("link")?.trim(),
       // Checkbox groups arrive as several entries under one name; radios as one.
       typology: data.getAll("typology").join(", "),
@@ -117,7 +117,7 @@ const REGISTER_EMAIL = "info@buildinclt.com";
       attendance: data.get("attendance"),
       team: data.get("team"),
       goal: data.get("goal")?.trim(),
-      stage: "Modulthon 01",
+      thon: "Modulthon 01",
       page: location.href,
     };
 

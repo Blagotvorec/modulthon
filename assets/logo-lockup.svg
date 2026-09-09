@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 100" color="#0E0D0B" role="img" aria-label="Modulthon">
+  <g fill="currentColor">
+    <rect x="0"  y="0"  width="74" height="22"/>
+    <rect x="78" y="0"  width="22" height="74"/>
+    <rect x="26" y="78" width="74" height="22"/>
+    <rect x="0"  y="26" width="22" height="74"/>
+  </g>
+  <text x="140" y="50" fill="currentColor" dominant-baseline="central"
+        font-family="'Inter Tight', Helvetica, Arial, sans-serif"
+        font-size="46" font-weight="300" letter-spacing="7">MODULTHON</text>
+</svg>

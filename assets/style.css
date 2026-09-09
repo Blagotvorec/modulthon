@@ -254,6 +254,9 @@ button { font: inherit; color: inherit; }
   gap: clamp(10px, 1.8vh, 22px);
   align-content: center;
   min-height: 0;
+  /* Список из семидесяти слов — запасной вариант для случая без JS, и он не
+     должен вываливаться за экран, которому запрещено прокручиваться. */
+  overflow: hidden;
 }
 
 /* Not a word-cloud generator — a hand-set field. Weight and opacity carry the
@@ -291,6 +294,87 @@ button { font: inherit; color: inherit; }
 }
 .tag--lg:hover { color: var(--tan); }
 .tag--md:hover { color: var(--bone); }
+
+/* ── облако-сфера ───────────────────────────────────────────────────────── */
+
+/* Два холста на весь экран: задний под содержимым страницы, передний над ним.
+   Слово попадает в тот или другой по своей полусфере, поэтому оно проходит
+   за заголовком и перед ним, а не поверх всего подряд. */
+.cloud-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Ручка центра. Её не должно быть видно, пока к ней не потянулись: круг из
+   пунктира появляется под курсором и снова растворяется. */
+#cloudHandle {
+  position: fixed;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 1px dashed var(--line);
+  border-radius: 50%;
+  background: none;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+#cloudHandle::before {
+  content: "";
+  position: absolute;
+  inset: 50%;
+  width: 5px; height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: var(--tan);
+}
+#cloudHandle:hover, #cloudHandle.active { opacity: 1; }
+#cloudHandle:focus-visible { opacity: 1; }
+#cloudHandle.grabbing { cursor: grabbing; border-color: var(--tan); }
+
+/* Подсказка и заодно табло: во время перетаскивания показывает готовую строку
+   атрибутов, которую можно перенести в разметку и зафиксировать для всех. */
+#cloudHint {
+  position: fixed;
+  z-index: 4;
+  left: 50%;
+  bottom: clamp(58px, 8vh, 84px);
+  transform: translateX(-50%);
+  max-width: min(92vw, 640px);
+  padding: 0.55em 1.1em;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease);
+}
+#cloudHint.show { opacity: 1; }
+
+/* Приз — единственный абзац на первом экране, который что-то обещает, а не
+   описывает. Он закрывает правую колонку, потому что читается последним:
+   сначала что можно спроектировать, потом что за это будет. */
+.prize {
+  margin: 0;
+  max-width: 48ch;
+  padding-top: clamp(8px, 1.5vh, 18px);
+  border-top: 1px solid var(--line-2);
+  font-size: clamp(11.5px, min(1.02vw, 1.65vh), 16px);
+  line-height: 1.45;
+  color: var(--muted);
+}
+.prize b { font-weight: 400; color: var(--tan); }
 
 /* Below this the two columns stack, and the quietest tier is the first thing
    to go — a screen that fits is worth more than the last eight words. */

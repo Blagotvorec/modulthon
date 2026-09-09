@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="#0E0D0B" role="img" aria-label="Modulthon">
+  <!-- One module, four times.
+
+       The same bar — identical length, identical thickness — laid four times
+       around a void, each turned a quarter from the last. That is the whole
+       argument of modular building: you do not draw a house, you draw a piece
+       and decide how it repeats. The empty middle is what the repetition
+       encloses, which is the part a client actually buys.
+
+       Родня Nusathon по конструкции: та же доска в 22 единицы, тот же квадрат
+       в 100, тот же зазор в 4 на стыках. Там доски переплетены — здесь та же
+       доска повёрнута вокруг себя. Разные операции одного материала.
+
+       Single colour, no gradients, no type: survives a 16px favicon, a
+       branding iron and a cast panel edge equally well. -->
+  <g fill="currentColor">
+    <rect x="0"  y="0"  width="74" height="22"/>
+    <rect x="78" y="0"  width="22" height="74"/>
+    <rect x="26" y="78" width="74" height="22"/>
+    <rect x="0"  y="26" width="22" height="74"/>
+  </g>
+</svg>

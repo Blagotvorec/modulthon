@@ -8,7 +8,7 @@ DNS уже настроен: `modulthon.com` и `www.modulthon.com` смотря
 теперь у него собственный сайт.
 
 ```
-nusathon.com   ──▶ /home/inclt/nusathon/
+nusathon.com   ──▶ /home/inclt/inclt-webapp/nusathon/
 modulthon.com  ──▶ /home/inclt/modulthon/      ← было 301
 ```
 
@@ -45,7 +45,7 @@ server {
     listen 80;
     server_name nusathon.com www.nusathon.com;
 
-    root /home/inclt/nusathon;
+    root /home/inclt/inclt-webapp/nusathon;
     index index.html;
 
     location /assets/ {
@@ -147,3 +147,35 @@ sudo -iu inclt git -C /home/inclt/modulthon pull
 ```
 
 Сборки нет, nginx перезапускать не нужно.
+
+---
+
+## Приём заявок: пропустить /api/ на Node
+
+Форма отправляется на `/api/thon`, а Node слушает на `127.0.0.1:3000`. Без
+этого блока nginx на этих доменах отдаёт только статику, и заявка уходит в
+никуда. Добавляется в оба конфига, внутрь `server { … }`, рядом с
+`location / { … }`:
+
+```nginx
+    # Приём заявок. Именно /api/ целиком, а не отдельный маршрут на каждый:
+    # иначе новый эндпоинт молча уйдёт в раздачу статики.
+    location /api/ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+```
+
+`X-Forwarded-For` обязателен: без него сервер видит адрес самого nginx, и
+ограничение по частоте считает все заявки пришедшими с одного адреса.
+
+Применить:
+
+```bash
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Подробности про переменные окружения и порядок выкатки — в
+https://github.com/Blagotvorec/nusathon/blob/main/APPLICATIONS.md.
