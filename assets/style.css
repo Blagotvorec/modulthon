@@ -533,3 +533,44 @@ button { font: inherit; color: inherit; }
     from { opacity: 0; transform: translateY(10px) scale(0.98); }
   }
 }
+
+/* ── знак, который складывается при поздравлении ─────────────────────────── */
+
+/* Восемь досок съезжаются каждая со своей стороны и сплетаются в знак. Смысл
+   буквальный: человек только что стал частью плетения. Играет один раз при
+   открытии окна — это событие, а не фон, и повторять его незачем. */
+
+.weave {
+  width: clamp(48px, 9vw, 66px);
+  height: auto;
+  color: var(--tan);
+  margin-bottom: 2px;
+}
+.wv {
+  fill: currentColor;
+  opacity: 0;
+  animation: wv-in 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(0.06s + var(--n) * 0.07s);
+}
+.wv--l { transform: translateX(-46px); }
+.wv--r { transform: translateX(46px); }
+.wv--t { transform: translateY(-46px); }
+.wv--b { transform: translateY(46px); }
+
+@keyframes wv-in {
+  to { opacity: 1; transform: none; }
+}
+
+/* Когда все доски на месте — короткая тёплая вспышка: сплелось. */
+.join[open] .weave { animation: wv-glow 1.1s ease-out 0.72s both; }
+@keyframes wv-glow {
+  0%   { filter: none; }
+  35%  { filter: drop-shadow(0 0 16px rgba(240, 214, 170, 0.75)); }
+  100% { filter: none; }
+}
+
+/* Просьбу о меньшем движении уважаем: знак просто стоит собранным. */
+@media (prefers-reduced-motion: reduce) {
+  .wv { animation: none; opacity: 1; transform: none; }
+  .join[open] .weave { animation: none; }
+}
