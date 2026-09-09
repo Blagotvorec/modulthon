@@ -101,14 +101,23 @@ const REGISTER_EMAIL = "info@buildinclt.com";
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    // «Хотя бы один мессенджер» разметкой не выражается: required на обоих
+    // потребовал бы оба, а у большинства есть только один.
+    const tg = form.elements.telegram;
+    const wa = form.elements.whatsapp;
+    tg.setCustomValidity(
+      !tg.value.trim() && !wa.value.trim()
+        ? "Оставьте Telegram или WhatsApp — туда мы и ответим"
+        : ""
+    );
     if (!form.reportValidity()) return;
 
     const data = new FormData(form);
     const registration = {
       name: data.get("name")?.trim(),
-      email: data.get("email")?.trim(),
       city: data.get("city")?.trim(),
-      contact: data.get("telegram")?.trim(),
+      telegram: data.get("telegram")?.trim(),
+      whatsapp: data.get("whatsapp")?.trim(),
       link: data.get("link")?.trim(),
       // Checkbox groups arrive as several entries under one name; radios as one.
       typology: data.getAll("typology").join(", "),
